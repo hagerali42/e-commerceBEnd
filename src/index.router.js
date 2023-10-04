@@ -32,7 +32,6 @@ const initApp = (app, express) => {
     
     //Setup API Routing 
     app.use(`/auth`, authRouter)
-    app.use(`/user`, userRouter)
     app.use(`/product`, productRouter)
     app.use(`/category`, categoryRouter)
     app.use(`/subCategory`, subcategoryRouter)
@@ -42,8 +41,6 @@ const initApp = (app, express) => {
     app.use(`/order`, orderRouter)
     app.use(`/brand`, branRouter)
     app.use(`/favourite`, favorite)
-
-   
 
 
     app.all('*', (req, res, next) => {
