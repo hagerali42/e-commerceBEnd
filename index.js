@@ -6,15 +6,18 @@ import dotenv from 'dotenv'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 dotenv.config({ path: path.join(__dirname, './config/.env') })
 import express from 'express'
+import cors from 'cors'
 import initApp from './src/index.router.js'
 const app = express()
 // setup port and the baseUrl
 const port = process.env.PORT || 5000
+app.use(cors())
+initApp(app ,express)
+
 app.get('/', (req, res) =>{
-    res.json({message:'welcome '})
+   return  res.json({message:'welcome '})
 })
 //bootstrap server function
-initApp(app ,express)
 
 app.listen(port, () => console.log(chalk.bgMagenta.bold(`Example app listening on port ${port}!)`)))
 
