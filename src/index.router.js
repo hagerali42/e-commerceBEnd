@@ -13,7 +13,6 @@ import userRouter from './modules/user/user.router.js'
 import favorite from './modules/favorite/favorite.router.js'
 import { globalErrorHandling } from './utils/errorHandling.js'
 import morgan from 'morgan'
-import cors from 'cors'
 import chalk from 'chalk'
 
 
