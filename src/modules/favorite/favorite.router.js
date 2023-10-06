@@ -15,11 +15,10 @@ router.route('/')
 )
 
 
-router.route('/:id')
+router.route('/:productId')
 .patch(
     auth(Object.values(roles)),
     validation(Val.addToFavVal),
-
     asyncHandler(favController.addToFavorite)
 )
 
