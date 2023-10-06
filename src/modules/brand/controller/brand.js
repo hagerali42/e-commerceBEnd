@@ -79,7 +79,7 @@ import productModel from './../../../../DB/model/Product.model.js';
   export const getAllBrand = async (req, res, next) => {
     const mongooseQuery =  brandModel.find()
     const api=new ApiFeature(mongooseQuery,req.query)
-    .pagenation().sort().select().filter().search() 
+    .pagenation(brandModel).sort().select().filter().search() 
     const brands = await api.mongooseQuery
     return res.status(StatusCodes.ACCEPTED).json({ message: "Done",result: brands });
   };

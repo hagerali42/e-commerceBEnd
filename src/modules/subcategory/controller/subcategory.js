@@ -87,7 +87,7 @@ import productModel from "../../../../DB/model/Product.model.js";
     .populate([{path:'categoryId'}])
     
     const api=new ApiFeature(mongooseQuery,req.query)
-    .pagenation().sort().select().filter().search()
+    .pagenation(subcategoryModel).sort().select().filter().search()
 
     const subCategory=await api.mongooseQuery
 
