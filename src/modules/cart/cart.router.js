@@ -11,13 +11,13 @@ router.route('/')
 
 .get(
     auth(Object.values(roles)),
-  validation(Val.addToCartval),
+  validation(Val.getCartuserVal),
   asyncHandler(cartController.getCartuser)
 )
 
 .post(
     auth(Object.values(roles)),
-    validation(Val.getCartuserVal),
+    validation(Val.addToCartval),
  asyncHandler( cartController.addToCart)
 )
 
