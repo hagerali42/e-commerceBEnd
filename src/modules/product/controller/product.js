@@ -82,7 +82,7 @@ export const updateProduct = async (req, res, next) => {
   
   const product = await productModel.findById(productId);
   if (!product) {
-    return next(new ErrorClass(" peoduct not found", StatusCodes.NOT_FOUND));
+    return next(new ErrorClass(" product not found", StatusCodes.NOT_FOUND));
   }
    //check if category &brand
   if(categoryId &&subcategoryId){
@@ -153,7 +153,7 @@ export const deletProduct = async (req, res, next) => {
   
   const product = await productModel.findByIdAndDelete(productId);
   if (!product) {
-    return next(new ErrorClass(" peoduct not found", StatusCodes.NOT_FOUND));
+    return next(new ErrorClass(" product not found", StatusCodes.NOT_FOUND));
   }
 
    await cloudinary.uploader.destroy(product.image.public_id)
@@ -188,10 +188,11 @@ export const getAllProductes = async (req, res, next) => {
 
 };
 export const getProductById=async (req, res, next) => {
-  const productId=req.params._id
+  const {productId}=req.params
+
   const product =await productModel.findById(productId).populate('categoryId subcategoryId brandId')
   if (!product) {
-    return next(new ErrorClass(" peoduct not found", StatusCodes.NOT_FOUND));
+    return next(new ErrorClass(" product not found", StatusCodes.NOT_FOUND));
   }
    return res.status(StatusCodes.ACCEPTED).json({message: "Done", product})
   }
