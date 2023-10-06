@@ -39,7 +39,7 @@ export const addReview =async (req, res,next) =>{
  return res.status(200).json({message:"Done",review})
 }
 export const updateReview =async (req, res,next) =>{
-    const reviewId=req.params.id;
+    const {reviewId}=req.params;
     const createdBy= req.user._id;
     const {rating ,comment}=req.body;
     const isReviewed =await reviewModel.findOne({
@@ -63,7 +63,7 @@ export const updateReview =async (req, res,next) =>{
   }
 
   export const deleteReview =async (req, res,next) =>{
-    const reviewId=req.params.id;
+    const {reviewId}=req.params;
     const createdBy= req.user._id;
     const isReviewed =await reviewModel.findOneAndDelete({
       createdBy,

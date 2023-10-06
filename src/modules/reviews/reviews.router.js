@@ -14,7 +14,7 @@ router.route('/')
    asyncHandler(addReview)
 )
 
-router.route('/:id')
+router.route('/:reviewId')
 .put(
     auth(Object.values(roles)),
     

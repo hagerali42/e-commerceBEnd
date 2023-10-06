@@ -174,7 +174,6 @@ createInvoice(invoice,pdfpath);
 };
 
 
-
 export const webhook = async (req, res) => {
     const sig = req.headers['stripe-signature'];
   
