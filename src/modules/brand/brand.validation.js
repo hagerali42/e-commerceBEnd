@@ -36,7 +36,7 @@ export const getallBrandVal = {
 export const getBrandByIdVal = {
     body: joi.object().keys({}),
     params: joi.object().required().keys({
-        categoryId: generalFields.id
+        brandId: generalFields.id
     }),
     query: joi.object().required().keys({})
 }
