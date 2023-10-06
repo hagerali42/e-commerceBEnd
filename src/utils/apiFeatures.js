@@ -56,7 +56,7 @@ export class ApiFeature {
       this.mongooseQuery.find({
         $or: [
           { name: { $regex: this.queryData.searchKey } },
-          { description: { $regex: this.queryData.searchKey } },
+          // { description: { $regex: this.queryData.searchKey } },
         ],
       });
     }

@@ -100,7 +100,7 @@ export const getAllcategories = async (req, res, next) => {
   .populate([{ path: "subcategories" }]);
   
   const api=new ApiFeature(mongooseQuery,req.query)
-  .pagenation().search().filter().sort().select()
+  .pagenation(categoryModel).search().filter().sort().select()
 
   const categories = await api.mongooseQuery
   return res.status(StatusCodes.ACCEPTED).json({ message: "Done",result: categories });
