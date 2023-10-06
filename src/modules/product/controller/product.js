@@ -169,7 +169,7 @@ export const deletProduct = async (req, res, next) => {
 };
 
 export const getAllProductes = async (req, res, next) => {
-  const mongooseQuery= productModel.find()
+  const mongooseQuery= productModel.find().populate('categoryId subcategoryId brandId')
    const apiFeature=new ApiFeature(mongooseQuery,req.query)
    .pagenation(productModel)
    .filter()
@@ -187,3 +187,11 @@ export const getAllProductes = async (req, res, next) => {
     });
 
 };
+export const getProductById=async (req, res, next) => {
+  const productId=req.params._id
+  const product =await productModel.findById(productId).populate('categoryId subcategoryId brandId')
+  if (!product) {
+    return next(new ErrorClass(" peoduct not found", StatusCodes.NOT_FOUND));
+  }
+   return res.status(StatusCodes.ACCEPTED).json({message: "Done", product})
+  }
