@@ -11,7 +11,7 @@ router.route('/')
 .post(
     auth(Object.values(roles)),
    validation(Val.addOrderVal),
-   asyncHandler( orderController.createOrder)
+    orderController.createOrder
 )
 
 router.post('/webhook',
