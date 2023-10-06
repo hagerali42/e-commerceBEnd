@@ -99,6 +99,6 @@ import productModel from "../../../../DB/model/Product.model.js";
     const { subcategoryId}=req.params 
     const subcategories = await subcategoryModel.findById(subcategoryId)
     .populate([{path:'categoryId'}])
-    return res,status(StatusCodes.OK).json({result:subcategories})
+    return res.status(StatusCodes.OK).json({result:subcategories})
   };
 
