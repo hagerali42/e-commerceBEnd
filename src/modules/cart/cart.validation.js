@@ -6,7 +6,6 @@ export const addToCartval = {
         productId: generalFields.id,
         quantity:joi.number().required()
     }),
-    file: generalFields.file.required(), // image validation
     params: joi.object().required().keys({}),
     query: joi.object().required().keys({})
 }
