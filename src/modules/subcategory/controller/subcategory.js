@@ -78,7 +78,7 @@ import productModel from "../../../../DB/model/Product.model.js";
     }
       //delelt items of subcategory and product in DD
     await productModel.deleteMany({subcategoryId})
-    return res.status(StatusCodes.ACCEPTED).json({ message: "done",result: isExist });
+    return res.status(StatusCodes.ACCEPTED).json({ message: "SubCategory Deleted done" });
   };
 
   export const getAllSubcategories = async(req, res, next) => {  

@@ -28,12 +28,12 @@ router.route('/:brandId')
     auth([roles.admin]),
     fileUpload(fileValidation.image).single('image'),
     validation(Val.updateBrandVal),
-    asyncHandler(brandController.updateCategory)
+    asyncHandler(brandController.updateBrand)
 )
 .delete(
     auth([roles.admin]),
     validation(Val.deleteBrandVal),
-    asyncHandler(brandController.deleteCategory)
+    asyncHandler(brandController.deleteBrand)
 )
 .get(
 validation(Val.getBrandByIdVal),
