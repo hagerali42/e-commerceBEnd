@@ -6,7 +6,7 @@ import userModel from './../../../../DB/model/User.model.js';
 
 
 export const addToFavorite =async (req,res,next)=>{
-  const productId =req.params.id
+  const {productId} =req.params
   const product =await productModel.findById(productId)
   if(!product){
    return  next(new ErrorClass('Product not found',404))
