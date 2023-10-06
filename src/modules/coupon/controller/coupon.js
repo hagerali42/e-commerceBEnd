@@ -7,8 +7,7 @@ export const addCoupon = async (req, res, next) => {
   let { code,  amount ,expireDate,numOfuses } = req.body;
   const isExist = await couponModel.findOne({ code });
   if (isExist) {
-    return next(
-      new ErrorClass(`Duplicate coupon Name ${code}`, StatusCodes.CONFLICT));
+    return next( new ErrorClass("coupon alredy exist", StatusCodes.CONFLICT));
   }
 
   const coupon = await couponModel.create({

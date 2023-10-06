@@ -8,19 +8,22 @@ const router = Router()
 
 router.route('/')
 .post(
-    auth([roles.user]),
+    auth(Object.values(roles)),
+    
     validation(Val.addReview),
    asyncHandler(addReview)
 )
 
 router.route('/:id')
 .put(
-    auth([roles.user]),
+    auth(Object.values(roles)),
+    
     validation(Val.updateReviewVal),
    asyncHandler(updateReview)
 )
 .delete(
-    auth([roles.user]),
+    auth(Object.values(roles)),
+    
     validation(Val.deleteReviewVal),
     asyncHandler(updateReview)
 )

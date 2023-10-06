@@ -4,7 +4,7 @@ import { generalFields } from '../../middleware/validation.js'
 
 export const addcouponVal = {
     body: joi.object().required().keys({
-        code: generalFields.name,
+        code: joi.string(),
         amount:joi.number().positive().min(1).max(100).required(),
         expireDate:joi.date().greater(Date.now()),
         numOfuses:joi.number(),
@@ -16,7 +16,7 @@ export const addcouponVal = {
 
 export const updatecouponVal = {
     body: joi.object().required().keys({
-        code: generalFields.name,
+        code: joi.string(),
         amount:joi.number().positive().min(1).max(100).required(),
         expireDate:joi.date().greater(Date.now()),
         numOfuses:joi.number(),

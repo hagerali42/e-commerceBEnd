@@ -10,13 +10,13 @@ const router = Router()
 router.route('/')
 
 .get(
-    auth([roles.user]),
+    auth(Object.values(roles)),
   validation(Val.addToCartval),
   asyncHandler(cartController.getCartuser)
 )
 
 .post(
-    auth([roles.user]),
+    auth(Object.values(roles)),
     validation(Val.getCartuserVal),
  asyncHandler( cartController.addToCart)
 )

@@ -9,7 +9,7 @@ const router = Router()
 
 router.route('/')
 .post(
-   auth([roles.user]),
+    auth(Object.values(roles)),
    validation(Val.addOrderVal),
    asyncHandler( orderController.createOrder)
 )

@@ -13,7 +13,7 @@ router.route('/')
   asyncHandler(couponController.addCoupon)
 )
 .get(
-  auth([ roles.user]),
+  auth(Object.values(roles)),
 validation(Val.getallcouponVal),
 asyncHandler(couponController.getAllcoupons)
 )
@@ -30,7 +30,7 @@ router.route('/:couponId')
     asyncHandler(couponController.deleteCoupon)
 )
 .get(
-auth([ roles.user]),
+  auth(Object.values(roles)),
 validation(Val.getcouponByIdVal),
 asyncHandler(couponController.getcouponsById)
 )

@@ -9,7 +9,7 @@ const router = Router()
 
 router.route('/')
 .get(
-    auth([ roles.user]),
+    auth(Object.values(roles)),
     validation(Val.getFavorite),
     asyncHandler(favController.getFavorite)
 )
@@ -17,7 +17,7 @@ router.route('/')
 
 router.route('/:id')
 .patch(
-    auth([roles.user]),
+    auth(Object.values(roles)),
     validation(Val.addToFavVal),
 
     asyncHandler(favController.addToFavorite)
