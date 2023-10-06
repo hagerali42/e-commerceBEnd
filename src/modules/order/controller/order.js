@@ -1,15 +1,15 @@
 import cartModel from "../../../../DB/model/Cart.model.js";
 import couponModel from "../../../../DB/model/Coupon.model.js";
 import productModel from "../../../../DB/model/Product.model.js";
-import { createInvoice } from "../../../utils/createpdf.js";
+// import { createInvoice } from "../../../utils/createpdf.js";
 import { ErrorClass } from "../../../utils/error.Class.js";
 import orderModel from "./../../../../DB/model/Order.model.js";
 import Stripe from "stripe";
-import path from 'path'
-import { fileURLToPath } from 'url'
-import sendEmail from "../../../utils/email.js";
+// import path from 'path'
+// import { fileURLToPath } from 'url'
+// import sendEmail from "../../../utils/email.js";
 const stripe = new Stripe(process.env.stripKey);
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+// const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 
 
@@ -87,30 +87,31 @@ export const createOrder = async (req, res, next) => {
     paymentPrice,
     // paymentPrice: price - price * ((req.body.coupon?.amount || 0) / 100),
   });
+
 //pdf
-const invoice = {
-  shipping: {
-    email: req.user.email,
-    paymentPrice:paymentPrice,
-    name: req.user.name,
-    address,
-  },
-  items:existiesProduct.map((ele) => {
-    return {
-        item: ele.product.name,
-        quantity: ele.quantity,
-        amount: ele.product.paymentPrice
+// const invoice = {
+//   shipping: {
+//     email: req.user.email,
+//     paymentPrice:paymentPrice,
+//     name: req.user.name,
+//     address,
+//   },
+//   items:existiesProduct.map((ele) => {
+//     return {
+//         item: ele.product.name,
+//         quantity: ele.quantity,
+//         amount: ele.product.paymentPrice
       
-    };
-  }),
-  price,
-};
-const pdfpath = path.join(__dirname,"../../../utils/pdf/invioce.pdf");
-createInvoice(invoice,pdfpath);
- await sendEmail({to:req.user.email, subject:"pdf",
- path:pdfpath, name:"order invoice",
- type:'application/pdf'
-})
+//     };
+//   }),
+//   price,
+// };
+// const pdfpath = path.join(__dirname,"../../../utils/pdf/invioce.pdf");
+// createInvoice(invoice,pdfpath);
+//  await sendEmail({to:req.user.email, subject:"pdf",
+//  path:pdfpath, name:"order invoice",
+//  type:'application/pdf'
+// })
 
   if (paymentMethod == "card") {
     if (req.body.coupon) {
