@@ -40,4 +40,8 @@ router.route('/:productId')
     validation(Val.deletProductVal),
     asyncHandler(productController.deletProduct)
 )
+.get(
+    validation(Val.deletProductVal),
+    asyncHandler(productController.getProductById)
+)
 export default router
