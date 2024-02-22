@@ -313,7 +313,35 @@ const token =generateToken({payload})
 return res.status(StatusCodes.OK).json({message:'Done', token})
 
 }
-
+// 2. Middleware to Check Token Expiration
+export const checkTokenExpiration = (req, res, next) => {
+    // Check if token is present in headers
+    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+    if (!token) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not provided' });
+    }
+    
+    // Verify token expiration
+    jwt.verify(token, process.env.TOKEN_SIGNATURE, (err, decoded) => {
+        if (err) {
+            if (err.name === 'TokenExpiredError') {
+                return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token expired' });
+            }
+            return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Invalid token' });
+        }
+        // Token is valid, proceed to the next middleware or route handler
+        req.user = decoded;
+        next();
+    });
+}
+// 3. Refresh Token Endpoint
+export const refreshToken = (req, res, next) => {
+    // Logic to refresh token
+    // You can implement your own logic here, such as issuing a new token
+    // and sending it back to the frontend
+    const refreshedToken = generateToken({ payload: req.user });
+    res.status(StatusCodes.OK).json({ token: refreshedToken });
+}
 export const forgotPassword =async (req, res) => {
   const {email} = req.body
   const user = await userModel.findOne({ email });

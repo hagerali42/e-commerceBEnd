@@ -26,6 +26,9 @@ router.post('/login',
 validation(Val.login),
 asyncHandler(authController.login)
 )
+router.get("/checkToken", asyncHandler(authController.checkTokenExpiration));
+router.get("/refreshToken", asyncHandler(authController.refreshToken));
+
 
 router.put('/forgetPassword',
 validation(Val.forgetPassword),
