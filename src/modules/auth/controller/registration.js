@@ -315,11 +315,19 @@ return res.status(StatusCodes.OK).json({message:'Done', token})
 }
 // 2. Middleware to Check Token Expiration
 export const checkTokenExpiration = (req, res, next) => {
-    // Check if token is present in headers
-    const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-    if (!token) {
-        return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not provided' });
+  // Check if token is present in headers
+    const { authorization } = req.headers;
+    if (!authorization?.startsWith(process.env.BEARER_KEY)) {
+      return res.json({ message: "In-valid bearer key" });
     }
+    const token = authorization.split(process.env.BEARER_KEY)[1];
+    // if (!token) {
+    //   return res.json({ message: "Token not provided" });
+    // }
+    // const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+    // if (!token) {
+    //     return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not provided' });
+    // }
     
     // Verify token expiration
     jwt.verify(token, process.env.TOKEN_SIGNATURE, (err, decoded) => {
