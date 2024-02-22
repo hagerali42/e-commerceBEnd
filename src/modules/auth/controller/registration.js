@@ -7,6 +7,7 @@ import { compare, hash } from "../../../utils/HashAndCompare.js";
 import cloudinary from "../../../utils/cloudinary.js";
 import { nanoid } from "nanoid";
 import cartModel from "../../../../DB/model/Cart.model.js";
+import jwt from "jsonwebtoken";
 
 
 export const signup = async (req, res, next) => {
@@ -321,25 +322,25 @@ export const checkTokenExpiration = (req, res, next) => {
       return res.json({ message: "In-valid bearer key" });
     }
     const token = authorization.split(process.env.BEARER_KEY)[1];
-    // if (!token) {
-    //   return res.json({ message: "Token not provided" });
-    // }
-    // const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
-    // if (!token) {
-    //     return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not provided' });
-    // }
+    if (!token) {
+      return res.json({ message: "Token not provided" });
+    }
     
     // Verify token expiration
     jwt.verify(token, process.env.TOKEN_SIGNATURE, (err, decoded) => {
-        if (err) {
-            if (err.name === 'TokenExpiredError') {
-                return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token expired' });
-            }
-            return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Invalid token' });
+      if (err) {
+        if (err.name === "TokenExpiredError") {
+          return res
+            .status(StatusCodes.UNAUTHORIZED)
+            .json({ message: "Token expired" });
         }
-        // Token is valid, proceed to the next middleware or route handler
-        req.user = decoded;
-        next();
+        return res
+          .status(StatusCodes.UNAUTHORIZED)
+          .json({ message: "Invalid token" });
+      }
+      // Token is valid, proceed to the next middleware or route handler
+      req.user = decoded;
+      next();
     });
 }
 // 3. Refresh Token Endpoint
