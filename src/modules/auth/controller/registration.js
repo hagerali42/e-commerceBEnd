@@ -345,9 +345,6 @@ export const checkTokenExpiration = (req, res, next) => {
 }
 // 3. Refresh Token Endpoint
 export const refreshToken = (req, res, next) => {
-    // Logic to refresh token
-    // You can implement your own logic here, such as issuing a new token
-    // and sending it back to the frontend
     const refreshedToken = generateToken({ payload: req.user });
     res.status(StatusCodes.OK).json({ token: refreshedToken });
 }
